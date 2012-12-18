@@ -1,0 +1,22 @@
+This is a modification of the smbnetfs to allow diferent users accces a share with diferent credentials.
+
+The point is that I needed to acces shares specifying the user in the path but not the password (like this: cd mountpoint/user@192.168.3.12/share) retrieving the password from the auth file. 
+I found that its possible to specifiy the user and password in the path (like this: cd mountpoint/user\:password@192.168.3.12/share) or in the auth file, but not possible to specify the user in the path and let the program find the corresponding password in the auth file.
+
+This modification has been send to Mikhail Kshevetskiy the current mantainer of smbnetfs but never seems to find time to review it.
+
+This patch works fine with smbnetfs v0.5.3a.
+If you use a Debian based linux distribution you can easily get and then patch the original sources with apt-get:
+
+1. Get the sources:
+apt-get source smbnetfs
+
+2. Resolve dependencies:
+apt-get build-dep smbnetfs
+
+3. Apply the patch:
+patch -p1 smbnetfs.patch
+
+4. Compile and build a new deb package:
+apt-get -b source smbnetfs
+
